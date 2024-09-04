@@ -27,9 +27,42 @@ void setup() {
   }
 
   udp.begin(port);
+  connect_ccp()
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
+}
 
+
+bool connect_ccp() {
+  int last_sent = millis();
+  byte[] cmd msg;
+  byte[] input = new
+
+  do {
+    if (millis() - last_sent >= 200) {
+      udp.beginPacket(ccp_ID, port);
+
+      cmd = generateCommand("INIT");
+      udp.write(cmd, sizeof(cmd));
+      udp.endPacket();
+      last_sent = millis();
+    }
+
+    udp.parse
+  } while ();
+}
+
+
+byte[] generateCommand(Char[] msg) {
+  jsonDocument doc;
+
+  doc["message"] = msg;
+  byte[] jsonString;
+
+  //might need to manuly translate char array to byte array
+  serializeJson(doc, jsonString);
+
+  return jsonString;
 }
