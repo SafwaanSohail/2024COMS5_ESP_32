@@ -3,8 +3,8 @@
 #include <ArduinoJson.h>
 
 // WiFi credentials
-const char* ssid = "Your_SSID";
-const char* password = "Your_PASSWORD";
+const char* ssid = "ENGG2K3K";
+const char* password = "";
 
 // UDP Configuration
 WiFiUDP udp;
