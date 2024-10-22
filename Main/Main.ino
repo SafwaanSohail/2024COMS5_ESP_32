@@ -24,6 +24,14 @@ const int safeDistance = 20;  // Safe distance in cm
 long duration;
 int distance;
 
+// Command variables based on Table 2
+const String CMD_STOPC = "STOPC";      // Stop and close doors
+const String CMD_STOPO = "STOPO";      // Stop and open doors
+const String CMD_FSLOWC = "FSLOWC";    // Move forward slowly and keep doors closed
+const String CMD_FFASTC = "FFASTC";    // Move forward fast with doors closed
+const String CMD_RSLOWC = "RSLOWC";    // Move backward slowly and keep doors closed
+const String CMD_DISCONNECT = "DISCONNECT";  // Flash LED and indicate removal from track
+
 // Variables for BR status
 String brStatus = "STOPC";  // Initial status (stopped with doors closed)
 
@@ -90,24 +98,24 @@ void handleCCPMessage() {
   String action = doc["action"];
 
   // Process command based on action from Table 2
-  if (action == "STOPC") {
+  if (action == CMD_STOPC) {
     stopMotor();
     closeDoors();
-    brStatus = "STOPC";
-  } else if (action == "STOPO") {
+    brStatus = CMD_STOPC;
+  } else if (action == CMD_STOPO) {
     stopMotor();
     openDoors();
-    brStatus = "STOPO";
-  } else if (action == "FSLOWC") {
+    brStatus = CMD_STOPO;
+  } else if (action == CMD_FSLOWC) {
     moveForwardSlow();
-    brStatus = "FSLOWC";
-  } else if (action == "FFASTC") {
+    brStatus = CMD_FSLOWC;
+  } else if (action == CMD_FFASTC) {
     moveForwardFast();
-    brStatus = "FFASTC";
-  } else if (action == "RSLOWC") {
+    brStatus = CMD_FFASTC;
+  } else if (action == CMD_RSLOWC) {
     moveBackwardSlow();
-    brStatus = "RSLOWC";
-  } else if (action == "DISCONNECT") {
+    brStatus = CMD_RSLOWC;
+  } else if (action == CMD_DISCONNECT) {
     flashLED();
     brStatus = "OFLN";  // Offline status for disconnection
   }
